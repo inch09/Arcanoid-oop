@@ -8,8 +8,10 @@ public class Bonus {
     private int Y;
     private int diameter;
     private String str;
+    private BonusType bonusType;
     private int vremyazhizni;
-    Bonus(){
+
+    Bonus() {
         diameter = 30;
         vremyazhizni = 500;
     }
@@ -30,30 +32,30 @@ public class Bonus {
     public int getX() {
         return X;
     }
+
     public void spawn() {
         Random random = new Random();
         X = random.nextInt(100, 400);
         Y = random.nextInt(100, 400);
         int c = random.nextInt(1, 12);
-        if(c<=2){
-            color = new Color(1,1,1);
+        if (c <= 2) {
+            color = new Color(1, 1, 1);
             str = "plusochki";
-        }
-        else if(c>2 && c<=4){
+            bonusType = BonusType.PLUSOCHIKI2;
+        } else if (c <= 4) {
             color = Color.GREEN;
             str = "pluslife";
-        }
-        else if(c>4 && c<=6){
+        } else if (c <= 6) {
             color = Color.BLUE;
             str = "uvelichenieplatform";
-        }
-        else if(c>6 && c<=8){
+        } else if (c <= 8) {
             color = new Color(245, 87, 66);
             str = "minuszhizn";
         }
         estliseichas = true;
     }
-    public void ubratbonus(){
+
+    public void ubratbonus() {
         estliseichas = false;
     }
 
