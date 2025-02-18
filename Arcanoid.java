@@ -16,11 +16,10 @@ public class Arcanoid extends JPanel implements ActionListener, KeyListener {
     private int boardWidth;
     private int boardHeight;
 
-    Platform platform = new Platform(150,20,300,700,0);
-    Ball ball = new Ball(100,100,5,5,20);
-    Brick brick = new Brick(100,10);
+    Platform platform = new Platform(150, 20, 300, 700, 0);
+    Ball ball = new Ball(100, 100, 5, 5, 20);
+    Brick brick = new Brick(100, 10);
     Bonus bonus = new Bonus();
-
 
 
     Timer gameStart;
@@ -36,13 +35,11 @@ public class Arcanoid extends JPanel implements ActionListener, KeyListener {
         centerLabel.setText("213");
 
 
-
         gameStart = new Timer(10, this);
         gameStart.start();
 
 
     }
-
 
 
     public void paintComponent(Graphics g) {
@@ -59,10 +56,10 @@ public class Arcanoid extends JPanel implements ActionListener, KeyListener {
         g.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
         //ball
         g.setColor(Color.black);
-        g.fillOval(ball.getX(),ball.getY(), ball.getDiameter(), ball.getDiameter());
+        g.fillOval(ball.getX(), ball.getY(), ball.getDiameter(), ball.getDiameter());
         if (bonus.isEstliseichas()) {
             g.setColor(bonus.getColor());
-            g.fillOval(bonus.getX(),bonus.getY(),bonus.getDiameter(),bonus.getDiameter());
+            g.fillOval(bonus.getX(), bonus.getY(), bonus.getDiameter(), bonus.getDiameter());
         }
         if (gameOver) {
             g.setColor(Color.red);
@@ -79,7 +76,7 @@ public class Arcanoid extends JPanel implements ActionListener, KeyListener {
         }
         if ((ball.getX() >= (bonus.getX() - ball.getDiameter()) && ball.getX() <= (bonus.getX() + bonus.getDiameter())) && (ball.getY() >= (bonus.getY() - ball.getDiameter()) && ball.getY() <= (bonus.getY() + bonus.getDiameter())) && (bonus.isEstliseichas())) {
             bonus.setEstliseichas(false);
-            if (bonus.getStr().equals("plusochki")) {
+            if (bonus.getType().equals(BonusType.PLUSOCHKI2)) {
                 score += 5;
             }
             if (bonus.getStr().equals("pluslife")) {
@@ -96,19 +93,19 @@ public class Arcanoid extends JPanel implements ActionListener, KeyListener {
         }
         if (platform.getX() >= boardWidth - platform.getWidth()) {
             platform.setVelX(0);
-            platform.setX(boardWidth -1 - platform.getWidth());
+            platform.setX(boardWidth - 1 - platform.getWidth());
         } else if (platform.getX() <= 0) {
             platform.setVelX(0);
             platform.setX(1);
         }
         platform.izmenitX(platform.getVelX());
-        if ((ball.getX() >= boardWidth-ball.getDiameter()) || ball.getX() <= 0) {
+        if ((ball.getX() >= boardWidth - ball.getDiameter()) || ball.getX() <= 0) {
             ball.smenanapravleniyaX();
         }
         if (ball.getY() <= 0) {
             ball.smenanapravleniyaY();
         }
-        if (ball.getY() >= (boardHeight-ball.getDiameter())) {
+        if (ball.getY() >= (boardHeight - ball.getDiameter())) {
             countLife--;
             ball.smenanapravleniyaY();
             if (countLife == 0) {
@@ -148,6 +145,17 @@ public class Arcanoid extends JPanel implements ActionListener, KeyListener {
             ball.setVelX(ball.getVelX() / Math.abs(ball.getVelX()) * (Math.abs(ball.getVelX()) - 1));
 
         }
+/*        if(e.getKeyCode()==KeyEvent.VK_SPACE){
+            if(ball.getVelX()!=0) {
+                ball.setVelX(0);
+                ball.setVelY(0);
+            }
+            else{
+                ball.setVelX(zapomnitskorostX);
+                ball.setVelY(0);
+            }
+        }*/
+
 
     }
 
